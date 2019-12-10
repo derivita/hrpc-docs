@@ -1,17 +1,17 @@
 ---
 layout: tutorials
-title: gRPC Basics - Go
+title: HRPC Basics - Go
 group: basic
 short: Go
 ---
 This tutorial provides a basic Go programmer's introduction to
-working with gRPC.
+working with HRPC.
 
 By walking through this example you'll learn how to:
 
 - Define a service in a .proto file.
 - Generate server and client code using the protocol buffer compiler.
-- Use the Go gRPC API to write a simple client and server for your service.
+- Use the Go HRPC API to write a simple client and server for your service.
 
 It assumes that you have read the [Overview](/docs/) and are familiar
 with [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). Note that the
@@ -24,18 +24,18 @@ guide](https://developers.google.com/protocol-buffers/docs/reference/go-generate
 
 <div id="toc"></div>
 
-### Why use gRPC?
+### Why use HRPC?
 
 Our example is a simple route mapping application that lets clients get
 information about features on their route, create a summary of their route, and
 exchange route information such as traffic updates with the server and other
 clients.
 
-With gRPC we can define our service once in a .proto file and implement clients
-and servers in any of gRPC's supported languages, which in turn can be run in
+With HRPC we can define our service once in a .proto file and implement clients
+and servers in any of HRPC's supported languages, which in turn can be run in
 environments ranging from servers inside Google to your own tablet - all the
 complexity of communication between different languages and environments is
-handled for you by gRPC. We also get all the advantages of working with protocol
+handled for you by HRPC. We also get all the advantages of working with protocol
 buffers, including efficient serialization, a simple IDL, and easy interface
 updating.
 
@@ -62,7 +62,7 @@ You also should have the relevant tools installed to generate the server and cli
 ### Defining the service
 
 Our first step (as you'll know from the [Overview](/docs/)) is to
-define the gRPC *service* and the method *request* and *response* types using
+define the HRPC *service* and the method *request* and *response* types using
 [protocol buffers](https://developers.google.com/protocol-buffers/docs/overview). You can see the
 complete .proto file in
 [`examples/route_guide/routeguide/route_guide.proto`](https://github.com/grpc/grpc-go/blob/master/examples/route_guide/routeguide/route_guide.proto).
@@ -76,7 +76,7 @@ service RouteGuide {
 ```
 
 Then you define `rpc` methods inside your service definition, specifying their
-request and response types. gRPC lets you define four kinds of service method,
+request and response types. HRPC lets you define four kinds of service method,
 all of which are used in the `RouteGuide` service:
 
 - A *simple RPC* where the client sends a request to the server using the stub
@@ -143,9 +143,9 @@ message Point {
 
 ### Generating client and server code
 
-Next we need to generate the gRPC client and server interfaces from our .proto
+Next we need to generate the HRPC client and server interfaces from our .proto
 service definition. We do this using the protocol buffer compiler `protoc` with
-a special gRPC Go plugin. 
+a special HRPC Go plugin. 
 This is similar to what we did in the [quickstart guide](/docs/quickstart/go/)
 
 From the `route_guide` example directory run :
@@ -172,7 +172,7 @@ This contains:
 ### Creating the server
 
 First let's look at how we create a `RouteGuide` server. If you're only
-interested in creating gRPC clients, you can skip this section and go straight
+interested in creating HRPC clients, you can skip this section and go straight
 to [Creating the client](#client) (though you might find it interesting
 anyway!).
 
@@ -180,7 +180,7 @@ There are two parts to making our `RouteGuide` service do its job:
 
 - Implementing the service interface generated from our service definition:
   doing the actual "work" of our service.
-- Running a gRPC server to listen for requests from clients and dispatch them to
+- Running a HRPC server to listen for requests from clients and dispatch them to
   the right service implementation.
 
 You can find our example `RouteGuide` server in
@@ -239,7 +239,7 @@ The method is passed a context object for the RPC and the client's `Point`
 protocol buffer request. It returns a `Feature` protocol buffer object with the
 response information and an `error`. In the method we populate the `Feature`
 with the appropriate information, and then `return` it along with an `nil` error
-to tell gRPC that we've finished dealing with the RPC and that the `Feature` can
+to tell HRPC that we've finished dealing with the RPC and that the `Feature` can
 be returned to the client.
 
 ##### Server-side streaming RPC
@@ -267,9 +267,9 @@ our client wants to find `Feature`s) and a special
 
 In the method, we populate as many `Feature` objects as we need to return,
 writing them to the `RouteGuide_ListFeaturesServer` using its `Send()` method.
-Finally, as in our simple RPC, we return a `nil` error to tell gRPC that we've
+Finally, as in our simple RPC, we return a `nil` error to tell HRPC that we've
 finished writing responses. Should any error happen in this call, we return a
-non-`nil` error; the gRPC layer will translate it into an appropriate RPC status
+non-`nil` error; the HRPC layer will translate it into an appropriate RPC status
 to be sent on the wire.
 
 ##### Client-side streaming RPC
@@ -323,7 +323,7 @@ error returned from `Read()` after each call. If this is `nil`, the stream is
 still good and it can continue reading; if it's `io.EOF` the message stream has
 ended and the server can return its `RouteSummary`. If it has any other value,
 we return the error "as is" so that it'll be translated to an RPC status by the
-gRPC layer.
+HRPC layer.
 
 ##### Bidirectional streaming RPC
 Finally, let's look at our bidirectional streaming RPC `RouteChat()`.
@@ -363,7 +363,7 @@ completely independently.
 
 #### Starting the server
 
-Once we've implemented all our methods, we also need to start up a gRPC server
+Once we've implemented all our methods, we also need to start up a HRPC server
 so that clients can actually use our service. The following snippet shows how we
 do this for our `RouteGuide` service:
 
@@ -383,8 +383,8 @@ To build and start a server, we:
 
 1. Specify the port we want to use to listen for client requests using `lis, err
    := net.Listen("tcp", fmt.Sprintf(":%d", *port))`.
-2. Create an instance of the gRPC server using `grpc.NewServer()`.
-3. Register our service implementation with the gRPC server.
+2. Create an instance of the HRPC server using `grpc.NewServer()`.
+3. Register our service implementation with the HRPC server.
 4. Call `Serve()` on the server with our port details to do a blocking wait
    until the process is killed or `Stop()` is called.
 
@@ -398,7 +398,7 @@ service. You can see our complete example client code in
 
 #### Creating a stub
 
-To call service methods, we first need to create a gRPC *channel* to communicate
+To call service methods, we first need to create a HRPC *channel* to communicate
 with the server. We create this by passing the server address and port number to
 `grpc.Dial()` as follows:
 
@@ -414,7 +414,7 @@ You can use `DialOptions` to set the auth credentials (e.g., TLS, GCE
 credentials, JWT credentials) in `grpc.Dial` if the service you request requires
 that - however, we don't need to do this for our `RouteGuide` service.
 
-Once the gRPC *channel* is setup, we need a client *stub* to perform RPCs. We
+Once the HRPC *channel* is setup, we need a client *stub* to perform RPCs. We
 get this using the `NewRouteGuideClient` method provided in the `pb` package we
 generated from our .proto.
 
@@ -424,7 +424,7 @@ client := pb.NewRouteGuideClient(conn)
 
 #### Calling service methods
 
-Now let's look at how we call our service methods. Note that in gRPC-Go, RPCs
+Now let's look at how we call our service methods. Note that in HRPC-Go, RPCs
 operate in a blocking/synchronous mode, which means that the RPC call waits for
 the server to respond, and will either return a response or an error.
 
@@ -526,7 +526,7 @@ log.Printf("Route summary: %v", reply)
 The `RouteGuide_RecordRouteClient` has a `Send()` method that we can use to send
 requests to the server. Once we've finished writing our client's requests to the
 stream using `Send()`, we need to call `CloseAndRecv()` on the stream to let
-gRPC know that we've finished writing and are expecting to receive a response.
+HRPC know that we've finished writing and are expecting to receive a response.
 We get our RPC status from the `err` returned from `CloseAndRecv()`. If the
 status is `nil`, then the first return value from `CloseAndRecv()` will be a
 valid server response.

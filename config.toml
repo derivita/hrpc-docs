@@ -1,6 +1,6 @@
 baseURL = "https://grpc.io/"
 languageCode = "en-us"
-title = "gRPC"
+title = "HRPC"
 pygmentsCodeFences = true
 
 [params]
@@ -62,12 +62,12 @@ url = "/docs/talks"
 weight = 7
 
 [[menu.guides]]
-name = "What is gRPC?"
+name = "What is HRPC?"
 url = "/docs/guides/"
 weight = 1
 
 [[menu.guides]]
-name = "gRPC Concepts"
+name = "HRPC Concepts"
 url = "/docs/guides/concepts/"
 weight = 2
 
@@ -87,6 +87,6 @@ url = "/docs/guides/benchmarking/"
 weight = 5
 
 [[menu.guides]]
-name = "gRPC Wire Format"
+name = "HRPC Wire Format"
 url = "https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md"
 weight = 6

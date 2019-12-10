@@ -1,18 +1,18 @@
 ---
 layout: tutorials
-title: gRPC Basics - Web
+title: HRPC Basics - Web
 group: basic
 short: Web
 ---
 
 This tutorial provides a basic introduction on how to use
-gRPC-Web from browsers.
+HRPC-Web from browsers.
 
 By walking through this example you'll learn how to:
 
 - Define a service in a .proto file.
 - Generate client code using the protocol buffer compiler.
-- Use the gRPC-Web API to write a simple client for your service.
+- Use the HRPC-Web API to write a simple client for your service.
 
 It assumes a passing familiarity with [protocol
 buffers](https://developers.google.com/protocol-buffers/docs/overview).
@@ -21,15 +21,15 @@ buffers](https://developers.google.com/protocol-buffers/docs/overview).
 
 <a name="why-grpc"></a>
 
-### Why use gRPC and gRPC-Web?
+### Why use HRPC and HRPC-Web?
 
-With gRPC you can define your service once in a .proto file and implement
-clients and servers in any of gRPC's supported languages, which in turn can be
+With HRPC you can define your service once in a .proto file and implement
+clients and servers in any of HRPC's supported languages, which in turn can be
 run in environments ranging from servers inside Google to your own tablet - all
 the complexity of communication between different languages and environments is
-handled for you by gRPC. You also get all the advantages of working with
+handled for you by HRPC. You also get all the advantages of working with
 protocol buffers, including efficient serialization, a simple IDL, and easy
-interface updating. gRPC-Web lets you access gRPC services built in this manner
+interface updating. HRPC-Web lets you access HRPC services built in this manner
 from browsers using an idiomatic API.
 
 
@@ -37,7 +37,7 @@ from browsers using an idiomatic API.
 
 ### Define the Service
 
-The first step when creating a gRPC service is to define the service methods
+The first step when creating a HRPC service is to define the service methods
 and their request and response message types using protocol buffers. In this
 example, we define our `EchoService` in a file called
 [`echo.proto`](https://github.com/grpc/grpc-web/blob/0.4.0/net/grpc/gateway/examples/echo/echo.proto).
@@ -58,14 +58,14 @@ service EchoService {
 }
 ```
 
-### Implement gRPC Backend Server
+### Implement HRPC Backend Server
 
-Next, we implement our EchoService interface using Node in the backend gRPC
+Next, we implement our EchoService interface using Node in the backend HRPC
 `EchoServer`. This will handle requests from clients. See the file
 [`node-server/server.js`](https://github.com/grpc/grpc-web/blob/master/net/grpc/gateway/examples/echo/node-server/server.js)
 for details.
 
-You can implement the server in any language supported by gRPC. Please see
+You can implement the server in any language supported by HRPC. Please see
 the [main page][] for more details.
 
 ```js
@@ -78,11 +78,11 @@ function doEcho(call, callback) {
 ### Configure the Envoy Proxy
 
 In this example, we will use the [Envoy](https://www.envoyproxy.io/)
-proxy to forward the gRPC browser request to the backend server. You can see
+proxy to forward the HRPC browser request to the backend server. You can see
 the complete config file in
 [envoy.yaml](https://github.com/grpc/grpc-web/blob/master/net/grpc/gateway/examples/echo/envoy.yaml)
 
-To forward the gRPC requests to the backend server, we need a block like
+To forward the HRPC requests to the backend server, we need a block like
 this:
 
 ```yaml
@@ -120,8 +120,8 @@ You may also need to add some CORS setup to make sure the browser can request
 cross-origin content.
 
 
-In this simple example, the browser makes gRPC requests to port `:8080`. Envoy
-forwards the request to the backend gRPC server listening on port `:9090`.
+In this simple example, the browser makes HRPC requests to port `:8080`. Envoy
+forwards the request to the backend HRPC server listening on port `:9090`.
 
 
 
@@ -140,7 +140,7 @@ The `import_style` option passed to the `--js_out` flag makes sure the
 generated files will have CommonJS style `require()` statements.
 
 
-To generate the gRPC-Web service client stub, first you need the gRPC-Web
+To generate the HRPC-Web service client stub, first you need the HRPC-Web
 protoc plugin. To compile the plugin `protoc-gen-grpc-web`, you need to run
 this from the repo's root directory:
 

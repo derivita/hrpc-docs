@@ -1,6 +1,6 @@
-# The gRPC website and documentation
+# The HRPC website and documentation
 
-This repository houses the assets used to build and deploy the gRPC website, available at https://grpc.io. The site is built using the [Hugo](https://gohugo.io) static site generator. Check out the [Hugo Quick Start](https://gohugo.io/getting-started/quick-start/) for a quick intro.
+This repository houses the assets used to build and deploy the HRPC website, available at https://grpc.io. The site is built using the [Hugo](https://gohugo.io) static site generator. Check out the [Hugo Quick Start](https://gohugo.io/getting-started/quick-start/) for a quick intro.
 
 ## Running the site locally
 
@@ -18,7 +18,7 @@ make docker-serve
 
 ## Publishing the site
 
-The gRPC website is automatically published by [Netlify](https://netlify.com). Any time changes are pushed to the `master` branch, the site is re-built and re-deployed. This process does not require manual management.
+The HRPC website is automatically published by [Netlify](https://netlify.com). Any time changes are pushed to the `master` branch, the site is re-built and re-deployed. This process does not require manual management.
 
 ## Site content
 

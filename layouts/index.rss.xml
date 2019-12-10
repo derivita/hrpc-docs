@@ -3,7 +3,7 @@
   <channel>
     <title>{{ site.Title }} – {{ .Title }}</title>
     <link>{{ .Permalink }}</link>
-    <description>The gRPC blog</description>
+    <description>The HRPC blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>{{ site.LanguageCode }}</language>
     {{ with site.Author.email }}

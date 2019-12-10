@@ -6,8 +6,8 @@ group: async
 ---
 
 This tutorial shows you how to write a simple server and client in C++ using
-gRPC's asynchronous/non-blocking APIs. It assumes you are already familiar with
-writing simple synchronous gRPC code, as described in [gRPC Basics:
+HRPC's asynchronous/non-blocking APIs. It assumes you are already familiar with
+writing simple synchronous HRPC code, as described in [HRPC Basics:
 C++](/docs/tutorials/basic/cpp/). The example used in this tutorial follows on
 from the basic [Greeter example](https://github.com/grpc/grpc/tree/{{< param grpc_release_tag >}}/examples/cpp/helloworld) we used in the
 [overview](/docs/). You'll find it along with installation
@@ -18,7 +18,7 @@ instructions in
 
 ### Overview
 
-gRPC uses the
+HRPC uses the
 [`CompletionQueue`](/grpc/cpp/classgrpc_1_1_completion_queue.html)
 API for asynchronous operations. The basic work flow
 is as follows:
@@ -129,7 +129,7 @@ this object as the unique tag for the call.
    public:
     // Take in the "service" instance (in this case representing an asynchronous
     // server) and the completion queue "cq" used for asynchronous communication
-    // with the gRPC runtime.
+    // with the HRPC runtime.
     CallData(Greeter::AsyncService* service, ServerCompletionQueue* cq)
         : service_(service), cq_(cq), responder_(&ctx_), status_(CREATE) {
       // Invoke the serving logic right away.
@@ -157,7 +157,7 @@ this object as the unique tag for the call.
         std::string prefix("Hello ");
         reply_.set_message(prefix + request_.name());
 
-        // And we are done! Let the gRPC runtime know we've finished, using the
+        // And we are done! Let the HRPC runtime know we've finished, using the
         // memory address of this instance as the uniquely identifying tag for
         // the event.
         responder_.Finish(reply_, Status::OK, this);

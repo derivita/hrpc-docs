@@ -2,38 +2,38 @@
 layout: guides
 title: Authentication
 description: |
-    This document provides an overview of gRPC authentication, including our built-in supported auth mechanisms, how to plug in your own authentication systems, and examples of how to use gRPC auth in our supported languages.
+    This document provides an overview of HRPC authentication, including our built-in supported auth mechanisms, how to plug in your own authentication systems, and examples of how to use HRPC auth in our supported languages.
 ---
 
 <div id="toc" class="toc mobile-toc"></div>
 
 ### Overview
 
-gRPC is designed to work with a variety of authentication mechanisms, making it
-easy to safely use gRPC to talk to other systems. You can use our supported
+HRPC is designed to work with a variety of authentication mechanisms, making it
+easy to safely use HRPC to talk to other systems. You can use our supported
 mechanisms - SSL/TLS with or without Google token-based authentication - or you
 can plug in your own authentication system by extending our provided code.
 
-gRPC also provides a simple authentication API that lets you provide all the
+HRPC also provides a simple authentication API that lets you provide all the
 necessary authentication information as `Credentials` when creating a channel or
 making a call.
 
 ### Supported auth mechanisms
 
-The following authentication mechanisms are built-in to gRPC:
+The following authentication mechanisms are built-in to HRPC:
 
-- **SSL/TLS**: gRPC has SSL/TLS integration and promotes the use of SSL/TLS
+- **SSL/TLS**: HRPC has SSL/TLS integration and promotes the use of SSL/TLS
 to authenticate the server, and to encrypt all the data exchanged between
 the client and the server. Optional mechanisms are available for clients to
 provide certificates for mutual authentication.
-- **Token-based authentication with Google**: gRPC provides a generic
+- **Token-based authentication with Google**: HRPC provides a generic
 mechanism (described below) to attach metadata based credentials to requests
 and responses. Additional support for acquiring access tokens
-(typically OAuth2 tokens) while accessing Google APIs through gRPC is
+(typically OAuth2 tokens) while accessing Google APIs through HRPC is
 provided for certain auth flows: you can see how this works in our code
 examples below. In general this mechanism must be used *as well as* SSL/TLS
 on the channel - Google will not allow connections without SSL/TLS, and
-most gRPC language implementations will not let you send credentials on an
+most HRPC language implementations will not let you send credentials on an
 unencrypted channel.
 
 <p class="note"> <strong>WARNING</strong>: Google credentials should only
@@ -43,8 +43,8 @@ impersonate the client to Google services.</p>
 
 ### Authentication API
 
-gRPC provides a simple authentication API based around the unified concept of
-Credentials objects, which can be used when creating an entire gRPC channel or
+HRPC provides a simple authentication API based around the unified concept of
+Credentials objects, which can be used when creating an entire HRPC channel or
 an individual call.
 
 #### Credential types
@@ -99,7 +99,7 @@ passed to the factory method.
 
 #### Using Google token-based authentication
 
-gRPC applications can use a simple API to create a credential that works for
+HRPC applications can use a simple API to create a credential that works for
 authentication with Google in various deployment scenarios. Again, our example
 is in C++ but you can find examples in other languages in our Examples section.
 
@@ -124,7 +124,7 @@ handles communication with the authentication systems to obtain OAuth2 access
 tokens and attaches them to each outgoing RPC on the corresponding channel.
 
 
-#### Extending gRPC to support other authentication mechanisms
+#### Extending HRPC to support other authentication mechanisms
 
 The Credentials plugin API allows developers to plug in their own type of
 credentials. This consists of:
@@ -160,13 +160,13 @@ auto call_creds = grpc::MetadataCredentialsFromPlugin(
         new MyCustomAuthenticator("super-secret-ticket")));
 ```
 
-A deeper integration can be achieved by plugging in a gRPC credentials
-implementation at the core level. gRPC internals also allow switching out
+A deeper integration can be achieved by plugging in a HRPC credentials
+implementation at the core level. HRPC internals also allow switching out
 SSL/TLS with other encryption mechanisms.
 
 ### Examples
 
-These authentication mechanisms will be available in all gRPC's supported
+These authentication mechanisms will be available in all HRPC's supported
 languages. The following sections demonstrate how authentication and
 authorization features described above appear in each language: more languages
 are coming soon.
@@ -426,9 +426,9 @@ GreeterGrpc.GreeterStub stub = GreeterGrpc.newStub(channel);
 
 ##### With server authentication SSL/TLS
 
-In Java we recommend that you use OpenSSL when using gRPC over TLS. You can find
+In Java we recommend that you use OpenSSL when using HRPC over TLS. You can find
 details about installing and using OpenSSL and other required libraries for both
-Android and non-Android Java in the gRPC Java
+Android and non-Android Java in the HRPC Java
 [Security](https://github.com/grpc/grpc-java/blob/master/SECURITY.md#transport-security-tls)
 documentation.
 
@@ -470,7 +470,7 @@ GreeterGrpc.GreeterStub stub = GreeterGrpc.newStub(channel);
 ##### Authenticate with Google
 
 The following code snippet shows how you can call the [Google Cloud PubSub
-API](https://cloud.google.com/pubsub/overview) using gRPC with a service
+API](https://cloud.google.com/pubsub/overview) using HRPC with a service
 account. The credentials are loaded from a key stored in a well-known location
 or by detecting that the application is running in an environment that can
 provide one automatically, e.g. Google Compute Engine. While this example is

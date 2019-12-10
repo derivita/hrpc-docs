@@ -2,27 +2,27 @@
 layout: guides
 title: Error Handling
 description: |
-  This page describes how gRPC deals with errors, including gRPC's built-in error codes. Example code in different languages can be found [here](https://github.com/avinassh/grpc-errors).
+  This page describes how HRPC deals with errors, including HRPC's built-in error codes. Example code in different languages can be found [here](https://github.com/avinassh/grpc-errors).
 ---
 
 <div id="toc" class="toc mobile-toc"></div>
 
 ### Standard error model
 
-As you'll have seen in our concepts document and examples, when a gRPC call
+As you'll have seen in our concepts document and examples, when a HRPC call
 completes successfully the server returns an `OK` status to the client
 (depending on the language the `OK` status may or may not be directly used in
 your code). But what happens if the call isn't successful?
 
-If an error occurs, gRPC returns one of its error status codes instead, with an
+If an error occurs, HRPC returns one of its error status codes instead, with an
 optional string error message that provides further details about what happened.
-Error information is available to gRPC clients in all supported languages.
+Error information is available to HRPC clients in all supported languages.
 
 ### Richer error model
 
-The error model described above is the official gRPC error model,
-is supported by all gRPC client/server libraries, and is independent of
-the gRPC data format (whether protocol buffers or something else). You
+The error model described above is the official HRPC error model,
+is supported by all HRPC client/server libraries, and is independent of
+the HRPC data format (whether protocol buffers or something else). You
 may have noticed that it's quite limited and doesn't include the
 ability to communicate error details.
 
@@ -69,9 +69,9 @@ max headers size), effectively losing the original error
 
 ### Error status codes
 
-Errors are raised by gRPC under various circumstances, from network failures to
+Errors are raised by HRPC under various circumstances, from network failures to
 unauthenticated connections, each of which is associated with a particular
-status code. The following error status codes are supported in all gRPC
+status code. The following error status codes are supported in all HRPC
 languages.
 
 #### General errors

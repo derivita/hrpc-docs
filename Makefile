@@ -6,7 +6,7 @@ serve:
 	hugo server \
 		--buildDrafts \
 		--buildFuture \
-		--disableFastRender
+		--disableFastRender --baseURL=penguin.linux.test:1313 --bind=0.0.0.0
 
 docker-serve:
 	docker run --rm -it -v $(CURDIR):/src -p 1313:1313 $(DOCKER_IMG) $(SERVE_CMD)
