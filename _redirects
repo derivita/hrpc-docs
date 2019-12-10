@@ -1,0 +1,18 @@
+/grpc-go/*     https://grpc.github.io/grpc-go/:splat
+/grpc-java/*     https://grpc.github.io/grpc-java/:splat
+/grpc-python/*     https://grpc.github.io/grpc-python/:splat
+/grpc-dotnet/*     https://grpc.github.io/grpc-dotnet/:splat
+/grpc-swift/*     https://grpc.github.io/grpc-swift/:splat
+/grpc-proto/*     https://grpc.github.io/grpc-proto/:splat
+/grpc-web/*     https://grpc.github.io/grpc-web/:splat
+/grpc-dart/*     https://grpc.github.io/grpc-dart/:splat
+/grpc-community/*     https://grpc.github.io/grpc-community/:splat
+/grpc-node/*     https://grpc.github.io/grpc-node/:splat
+/grpc-swift/*     https://grpc.github.io/grpc-swift/:splat
+/grpc-php/*     https://grpc.github.io/grpc-php/:splat
+/grpc-java-api-checker/*     https://grpc.github.io/grpc-java-api-checker/:splat
+/grpc-docker-library/*     https://grpc.github.io/grpc-docker-library/:splat
+/grpc-experiments/*     https://grpc.github.io/grpc-experiments/:splat
+/grpc-haskell/*     https://grpc.github.io/grpc-haskell/:splat
+/grpc/*     https://grpc.github.io/grpc/:splat
+/release     https://grpc.github.io/release     200

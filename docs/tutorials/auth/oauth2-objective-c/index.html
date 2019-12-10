@@ -1,0 +1,103 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous><link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel=stylesheet><link rel=stylesheet type=text/css href=/css/style.css><title>HRPC</title><link rel=apple-touch-icon href=/favicons/apple-touch-icon.png><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=icon type=image/png href=/favicons/android-chrome-192x192.png sizes=192x192><link rel=icon type=image/png href=/favicons/android-chrome-512x512.png sizes=512x512><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=manifest href=/favicons/site.webmanifest><script async src="https://www.googletagmanager.com/gtag/js?id=UA-60127042-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-60127042-1');</script></head><body><div id=landing-content><div class=row><div class=topbannersub><nav class="navbar navbar-expand-md navbar-dark topnav"><a class=navbar-brand href=/><img src=/img/grpc-logo.png width=114 height=50></a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="topnav, collapse navbar-collapse" id=navbarSupportedContent style=float:right!important><ul class="navbar-nav ml-auto"><li class=nav-item><a class=nav-link href=/about/>About</a></li><li class="nav-item dropdown active"><a class="nav-link dropdown-toggle" href=/docs/ id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>Docs</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a class=dropdown-item href=/hrpc-docs/docs>Overview</a>
+<a class=dropdown-item href=/hrpc-docs/docs/quickstart/>Quick Start</a>
+<a class=dropdown-item href=/hrpc-docs/docs/guides/>Guides</a>
+<a class=dropdown-item href=/hrpc-docs/docs/tutorials/>Tutorials</a>
+<a class=dropdown-item href=/hrpc-docs/docs/reference/>Reference</a>
+<a class=dropdown-item href=/hrpc-docs/docs/samples/>Samples</a>
+<a class=dropdown-item href=/hrpc-docs/docs/talks>Presentations</a></div></li><li class=nav-item><a class=nav-link href=/blog>Blog</a></li><li class=nav-item><a class=nav-link href=/community>Community</a></li><li class=nav-item><a class=nav-link href=https://packages.grpc.io/>Packages</a></li><li class=nav-item><a class=nav-link href=/faq/>FAQ</a></li></ul></div></nav><div class=headertext>Documentation</div></div></div></div><div class="subnav d-none d-md-block"><a href=/docs>Overview</a>
+|
+<a href=/hrpc-docs/docs/quickstart/>Quick Start</a>
+|
+<a href=/hrpc-docs/docs/guides/>Guides</a>
+|
+<a href=/hrpc-docs/docs/tutorials/ class=active>Tutorials</a>
+|
+<a href=/hrpc-docs/docs/reference/>Reference</a></div><div class=quickstartcols><div class=quickstartcol1><h8>Tutorials</h8>
+<a href=/hrpc-docs/docs/tutorials/auth/oauth2-objective-c/ class=active>Auth - Objective-C</a>
+<a href=/hrpc-docs/docs/tutorials/async/helloasync-cpp/>Async - C++</a>
+<h8>Basic</h8>
+<a href=/hrpc-docs/docs/tutorials/basic/go/>Go</a>
+<a href=/hrpc-docs/docs/tutorials/basic/web/>Web</a></div><div class=quickstartcol2 style=margin-top:4%><h3 style=margin-top:0>OAuth2 on HRPC - Objective-C</h3><p>This example demonstrates how to use OAuth2 on HRPC to make
+authenticated API calls on behalf of a user.</p><p>By walking through it you'll also learn how to use the Objective-C HRPC API to:</p><ul><li>Initialize and configure a remote call object before the RPC is started.</li><li>Set request metadata elements on a call, which are semantically equivalent to
+HTTP request headers.</li><li>Read response metadata from a call, which is equivalent to HTTP response
+headers and trailers.</li></ul><p>It assumes you know the basics on how to make HRPC API calls using the
+Objective-C client library, as shown in <a href=/docs/tutorials/basic/objective-c/>HRPC Basics:
+Objective-C</a> and the
+<a href=/docs/>overview</a>, and are familiar with OAuth2 concepts like <em>access
+token</em>.</p><p></p><h3 id=example-code-and-setup>Example code and setup</h3><p>The example code for our tutorial is in
+[gprc/examples/objective-c/auth_sample](<a href=https://github.com/grpc/grpc/tree/>https://github.com/grpc/grpc/tree/</a>
+v1.25.0/examples/objective-c/auth_sample). To
+download the example, clone this repository by running the following commands:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ git clone -b v1.25.0 https://github.com/grpc/grpc
+$ cd grpc
+$ git submodule update --init
+</code></pre></div><p>Then change your current directory to <code>examples/objective-c/auth_sample</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ cd examples/objective-c/auth_sample
+</code></pre></div><p>Our example is a simple application with two views. The first view lets a user
+sign in and out using the OAuth2 flow of Google's <a href=https://developers.google.com/identity/sign-in/ios/>iOS SignIn
+library</a>. (Google's library
+is used in this example because the test HRPC service we are going to call
+expects Google account credentials, but neither HRPC nor the Objective-C client
+library is tied to any specific OAuth2 provider). The second view makes a HRPC
+request to the test server, using the access token obtained by the first view.</p><p>Note: OAuth2 libraries need the application to register and obtain an ID from
+the identity provider (in the case of this example app, Google). The app's XCode
+project is configured using that ID, so you shouldn't copy this project &ldquo;as is&rdquo;
+for your own app: it would result in your app being identified in the consent
+screen as &ldquo;HRPC-AuthSample&rdquo;, and not having access to real Google services.
+Instead, configure your own XCode project following the <a href=https://developers.google.com/identity/sign-in/ios/>instructions
+here</a>.</p><p>As with the other Objective-C examples, you also should have
+<a href=https://cocoapods.org/#install>Cocoapods</a> installed, as well as the relevant
+tools to generate the client library code. You can obtain the latter by
+following <a href=https://github.com/grpc/homebrew-grpc>these setup instructions</a>.</p><p></p><h3 id=try-it-out>Try it out!</h3><p>To try the sample app, first have Cocoapods generate and install the client library for our .proto
+files:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ pod install
+</code></pre></div><p>(This might have to compile OpenSSL, which takes around 15 minutes if Cocoapods
+doesn't have it yet on your computer's cache).</p><p>Finally, open the XCode workspace created by Cocoapods, and run the app.</p><p>The first view, <code>SelectUserViewController.h/m</code>, asks you to sign in with your
+Google account, and to give the &ldquo;HRPC-AuthSample&rdquo; app the following permissions:</p><ul><li>View your email address.</li><li>View your basic profile info.</li><li>&ldquo;Test scope for access to the Zoo service&rdquo;.</li></ul><p>This last permission, corresponding to the scope
+<code>https://www.googleapis.com/auth/xapi.zoo</code> doesn't grant any real capability:
+it's only used for testing. You can log out at any time.</p><p>The second view, <code>MakeRPCViewController.h/m</code>, makes a HRPC request to a test
+server at <a href=https://grpc-test.sandbox.google.com>https://grpc-test.sandbox.google.com</a>, sending the access token along
+with the request. The test service simply validates the token and writes in its
+response which user it belongs to, and which scopes it gives access to. (The
+client application already knows those two values; it's a way to verify that
+everything went as expected).</p><p>The next sections guide you step-by-step through how the HRPC call in
+<code>MakeRPCViewController</code> is performed. You can see the complete code in
+<a href=https://github.com/grpc/grpc/blob/v1.25.0/examples/objective-c/auth_sample/MakeRPCViewController.m>MakeRPCViewController.m</a>.</p><p></p><h3 id=create-a-call-with-access-token>Create a call with access token</h3><p>To make an authenticated call, first you need to initialize a <code>GRPCCallOptions</code> object and configure
+it with the access token.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objective-c data-lang=objective-c>GRPCMutableCallOptions <span style=color:#f92672>*</span>options <span style=color:#f92672>=</span> [[GRPCMutableCallOptions alloc] init];
+options.oauth2AccessToken <span style=color:#f92672>=</span> myAccessToken;
+</code></pre></div><p>Then you need to create and start your call with this call options object. Assume you have a proto
+service definition like this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-protobuf data-lang=protobuf><span style=color:#66d9ef>option</span> objc_class_prefix <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;AUTH&#34;</span>;<span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span><span style=color:#66d9ef>service</span> TestService {<span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span>  <span style=color:#66d9ef>rpc</span> UnaryCall(Request) <span style=color:#66d9ef>returns</span> (Response);<span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010></span>}<span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>A <code>unaryCallWithMessage:responseHandler:callOptions:</code> method, with which you're already familiar, is
+generated for the <code>AUTHTestService</code> class:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objective-c data-lang=objective-c>- (GRPCUnaryProtoRPC <span style=color:#f92672>*</span>)<span style=color:#a6e22e>unaryCallWithMessage:</span>(AUTHRequest <span style=color:#f92672>*</span>)message
+                            <span style=color:#a6e22e>responseHandler:</span>(<span style=color:#66d9ef>id</span><span style=color:#f92672>&lt;</span>GRPCProtoResponseHandler<span style=color:#f92672>&gt;</span>)responseHandler
+                                <span style=color:#a6e22e>callOptions:</span>(GRPCCallOptions <span style=color:#f92672>*</span>)callOptions;
+</code></pre></div><p>Use this method to generated the RPC object with your request options object:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objective-c data-lang=objective-c>GRPCUnaryProtoRPC <span style=color:#f92672>*</span>rpc <span style=color:#f92672>=</span> [client unaryCallWithMessage:myRequestMessage
+                                      responseHandler:myResponseHandler
+                                          callOptions:options];
+</code></pre></div><p>You can then start the RPC represented by this object at any later time like this:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objective-c data-lang=objective-c>[rpc start];
+</code></pre></div><h3 id=an-alternative-way-to-provide-access-token>An alternative way to provide access token</h3><p>Rather than setting <code>oauth2AccessToken</code> option in <code>GRPCCallOptions</code> before the RPC object is
+created, an alternative approach allows users providing access token at call start time.</p><p>To use this approach, first create a class in your project that conforms to
+<code>GRPCAuthorizationProtocol</code> protocol.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objective-c data-lang=objective-c><span style=color:#66d9ef>@interface</span> <span style=color:#a6e22e>TokenProvider</span> : <span style=color:#a6e22e>NSObject</span><span style=color:#f92672>&lt;</span>GRPCAuthorizationProtocol<span style=color:#f92672>&gt;</span>
+...
+<span style=color:#66d9ef>@end</span>
+
+<span style=color:#66d9ef>@implementation</span> <span style=color:#a6e22e>TokenProvider</span>
+
+- (<span style=color:#66d9ef>void</span>)<span style=color:#a6e22e>getTokenWithHandler:</span>(<span style=color:#66d9ef>void</span> (<span style=color:#f92672>^</span>)(NSString<span style=color:#f92672>*</span> token))handler {
+  ...
+}
+
+<span style=color:#66d9ef>@end</span>
+</code></pre></div><p>When creating an RPC object, pass an instance of this class to call option <code>authTokenProvider</code>:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-objective-c data-lang=objective-c>GRPCMutableCallOptions <span style=color:#f92672>*</span>options <span style=color:#f92672>=</span> [[GRPCMutableCallOptions alloc] init];
+options.authTokenProvider <span style=color:#f92672>=</span> [[TokenProvider alloc] init];
+GRPCUnaryProtoCall <span style=color:#f92672>*</span>rpc <span style=color:#f92672>=</span> [client unaryCallWithMessage:myRequestMessage
+                                       responseHandler:myResponseHandler
+                                           callOptions:options] start];
+[rpc start];
+</code></pre></div><p>When the call starts, it will call the <code>TokenProvider</code> instance's <code>getTokenWithHandler:</code> method with
+a callback <code>handler</code> and waits for the callback. The <code>TokenProvider</code> instance may call the handler
+at any time to provide the token for this call and resume the call process.</p></div></div></div><script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script><script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script></body></html>
