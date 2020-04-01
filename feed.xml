@@ -1,1 +1,21 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>HRPC –</title><link>http://hrpc.derivita.team/</link><description>The HRPC blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Dec 2019 21:51:42 -0700</lastBuildDate><image><url>https://grpc.io/img/grpc-logo.png</url><title>grpc.io</title><link>http://hrpc.derivita.team/</link></image><atom:link href="http://hrpc.derivita.team/feed.xml" rel="self" type="application/rss+xml"/></channel></rss>
+
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HRPC – </title>
+    <link>http://hrpc.derivita.team/</link>
+    <description>The HRPC blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+    <lastBuildDate>Mon, 09 Dec 2019 21:51:42 -0700</lastBuildDate>
+    <image>
+      <url>https://grpc.io/img/grpc-logo.png</url>
+      <title>grpc.io</title>
+      <link>http://hrpc.derivita.team/</link>
+    </image>
+    
+	<atom:link href="http://hrpc.derivita.team/feed.xml" rel="self" type="application/rss+xml" />
+    
+    
+  </channel>
+</rss>

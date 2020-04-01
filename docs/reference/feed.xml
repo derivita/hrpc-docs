@@ -1,5 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reference on HRPC</title><link>http://hrpc.derivita.team/docs/reference/</link><description>Recent content in Reference on HRPC</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="http://hrpc.derivita.team/docs/reference/feed.xml" rel="self" type="application/rss+xml"/><item><title/><link>http://hrpc.derivita.team/docs/reference/go/generated-code/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://hrpc.derivita.team/docs/reference/go/generated-code/</guid><description>Go Generated Code Reference This guide describes the code generated with the grpc plugin to protoc-gen-go when compiling .proto files with protoc.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Reference on HRPC</title>
+    <link>http://hrpc.derivita.team/docs/reference/</link>
+    <description>Recent content in Reference on HRPC</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="http://hrpc.derivita.team/docs/reference/feed.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>http://hrpc.derivita.team/docs/reference/go/generated-code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://hrpc.derivita.team/docs/reference/go/generated-code/</guid>
+      <description>Go Generated Code Reference This guide describes the code generated with the grpc plugin to protoc-gen-go when compiling .proto files with protoc.
 You can find out how to define a HRPC service in a .proto file in Service Definitions.
 Methods on generated server interfaces On the server side, each service Bar in the .proto file results in the function:
 func RegisterBarServer(s *grpc.Server, srv BarServer)
-The application can define a concrete implementation of the BarServer interface and register it with a grpc.</description></item></channel></rss>
+The application can define a concrete implementation of the BarServer interface and register it with a grpc.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,1 +1,88 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>http://hrpc.derivita.team/docs/quickstart/</loc></url><url><loc>http://hrpc.derivita.team/docs/guides/</loc></url><url><loc>http://hrpc.derivita.team/docs/tutorials/</loc></url><url><loc>http://hrpc.derivita.team/docs/reference/</loc></url><url><loc>http://hrpc.derivita.team/docs/</loc><lastmod>2019-12-09T22:15:44-07:00</lastmod></url><url><loc>http://hrpc.derivita.team/</loc><lastmod>2019-12-09T21:51:42-07:00</lastmod></url><url><loc>http://hrpc.derivita.team/about/</loc><lastmod>2019-12-09T21:51:42-07:00</lastmod></url><url><loc>http://hrpc.derivita.team/docs/reference/go/generated-code/</loc></url><url><loc>http://hrpc.derivita.team/docs/tutorials/async/helloasync-cpp/</loc></url><url><loc>http://hrpc.derivita.team/docs/guides/auth/</loc></url><url><loc>http://hrpc.derivita.team/categories/</loc></url><url><loc>http://hrpc.derivita.team/docs/guides/error/</loc></url><url><loc>http://hrpc.derivita.team/faq/</loc></url><url><loc>http://hrpc.derivita.team/docs/quickstart/go/</loc></url><url><loc>http://hrpc.derivita.team/docs/tutorials/basic/go/</loc></url><url><loc>http://hrpc.derivita.team/docs/tutorials/basic/web/</loc></url><url><loc>http://hrpc.derivita.team/docs/guides/concepts/</loc></url><url><loc>http://hrpc.derivita.team/docs/tutorials/auth/oauth2-objective-c/</loc></url><url><loc>http://hrpc.derivita.team/tags/</loc></url><url><loc>http://hrpc.derivita.team/docs/quickstart/web/</loc></url></urlset>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/quickstart/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/guides/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/tutorials/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/reference/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/</loc>
+    <lastmod>2019-12-09T22:15:44-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/</loc>
+    <lastmod>2019-12-09T21:51:42-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/about/</loc>
+    <lastmod>2019-12-09T21:51:42-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/reference/go/generated-code/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/tutorials/async/helloasync-cpp/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/guides/auth/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/guides/error/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/faq/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/quickstart/go/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/tutorials/basic/go/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/tutorials/basic/web/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/guides/concepts/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/tutorials/auth/oauth2-objective-c/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>http://hrpc.derivita.team/docs/quickstart/web/</loc>
+  </url>
+  
+</urlset>

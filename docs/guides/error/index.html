@@ -1,66 +1,335 @@
-<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel=stylesheet href=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css integrity=sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO crossorigin=anonymous><link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel=stylesheet><link rel=stylesheet type=text/css href=/css/style.css><title>HRPC</title><link rel=apple-touch-icon href=/favicons/apple-touch-icon.png><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=icon type=image/png href=/favicons/android-chrome-192x192.png sizes=192x192><link rel=icon type=image/png href=/favicons/android-chrome-512x512.png sizes=512x512><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=manifest href=/favicons/site.webmanifest><script async src="https://www.googletagmanager.com/gtag/js?id=UA-60127042-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','UA-60127042-1');</script></head><body><div id=landing-content><div class=row><div class=topbannersub><nav class="navbar navbar-expand-md navbar-dark topnav"><a class=navbar-brand href=/><img src=/img/grpc-logo.png width=114 height=50></a>
-<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="topnav, collapse navbar-collapse" id=navbarSupportedContent style=float:right!important><ul class="navbar-nav ml-auto"><li class=nav-item><a class=nav-link href=/about/>About</a></li><li class="nav-item dropdown active"><a class="nav-link dropdown-toggle" href=/docs/ id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>Docs</a><div class=dropdown-menu aria-labelledby=navbarDropdown><a class=dropdown-item href=/docs>Overview</a>
-<a class=dropdown-item href=/docs/quickstart/>Quick Start</a>
-<a class=dropdown-item href=/docs/guides/>Guides</a>
-<a class=dropdown-item href=/docs/tutorials/>Tutorials</a>
-<a class=dropdown-item href=/docs/reference/>Reference</a>
-<a class=dropdown-item href=/docs/samples/>Samples</a>
-<a class=dropdown-item href=/docs/talks>Presentations</a></div></li><li class=nav-item><a class=nav-link href=/blog>Blog</a></li><li class=nav-item><a class=nav-link href=/community>Community</a></li><li class=nav-item><a class=nav-link href=https://packages.grpc.io/>Packages</a></li><li class=nav-item><a class=nav-link href=/faq/>FAQ</a></li></ul></div></nav><div class=headertext>Documentation</div></div></div></div><div class="subnav d-none d-md-block"><a href=/docs>Overview</a>
-|
-<a href=/docs/quickstart/>Quick Start</a>
-|
-<a href=/docs/guides/ class=active>Guides</a>
-|
-<a href=/docs/tutorials/>Tutorials</a>
-|
-<a href=/docs/reference/>Reference</a></div><div class=quickstartcols><div class=quickstartcol1><h8>Guides</h8>
-<a href=/docs/guides/>What is HRPC?</a>
-<a href=/docs/guides/concepts/>HRPC Concepts</a>
-<a href=/docs/guides/auth/>Authentication</a>
-<a href=/docs/guides/error/ class=active>Error handling and debugging</a>
-<a href=/docs/guides/benchmarking/>Benchmarking</a>
-<a href=https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md>HRPC Wire Format</a>
-<h8 style=margin-top:25%>Related Guides</h8>
-<a href=https://developers.google.com/protocol-buffers/docs/overview>Protocol Buffers</a></div><div class=quickstartcol2 style=margin-top:4%><h3 style=margin-top:0>Error Handling</h3><p class=lead>This page describes how HRPC deals with errors, including HRPC's built-in error codes. Example code in different languages can be found <a href=https://github.com/avinassh/grpc-errors>here</a>.</p><h3 id=standard-error-model>Standard error model</h3><p>As you'll have seen in our concepts document and examples, when a HRPC call
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<title>HRPC</title>
+
+
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
+<link rel="shortcut icon" href="/favicons/favicon.ico">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192" >
+<link rel="icon" type="image/png" href="/favicons/android-chrome-512x512.png" sizes="512x512" >
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/favicons/site.webmanifest">
+
+
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-60127042-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-60127042-1');
+    </script>
+
+  </head>
+  <body>
+    <div id="landing-content">
+      <div class="row">
+        <div class="topbannersub">
+          <nav class="navbar navbar-expand-md navbar-dark topnav">
+            <a class="navbar-brand" href="/">
+              <img src="/img/grpc-logo.png" width="114" height="50">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="topnav, collapse navbar-collapse" id="navbarSupportedContent" style="float:right !important">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item ">
+                  <a class="nav-link" href="/about/">About</a>
+                </li>
+                <li class="nav-item dropdown active">
+                  <a class="nav-link dropdown-toggle" href="/docs/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Docs
+                  </a>
+
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    
+                    
+                    <a class="dropdown-item" href="/docs">
+                      Overview
+                    </a>
+                    
+                    
+                    <a class="dropdown-item" href="/docs/quickstart/">
+                      Quick Start
+                    </a>
+                    
+                    
+                    <a class="dropdown-item" href="/docs/guides/">
+                      Guides
+                    </a>
+                    
+                    
+                    <a class="dropdown-item" href="/docs/tutorials/">
+                      Tutorials
+                    </a>
+                    
+                    
+                    <a class="dropdown-item" href="/docs/reference/">
+                      Reference
+                    </a>
+                    
+                    
+                    <a class="dropdown-item" href="/docs/samples/">
+                      Samples
+                    </a>
+                    
+                    
+                    <a class="dropdown-item" href="/docs/talks">
+                      Presentations
+                    </a>
+                    
+                  </div>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/blog">
+                    Blog
+                  </a> 
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/community">Community</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="https://packages.grpc.io/">
+                    Packages
+                  </a> 
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/faq/">FAQ</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          
+          
+
+
+
+            <div class="headertext">Documentation</div>
+  </div>
+        </div>
+        </div>
+
+    
+
+
+<div class="subnav d-none d-md-block">
+  <a href="/docs">
+    Overview
+  </a>
+
+  
+  
+  
+  |
+  <a href="/docs/quickstart/">
+    Quick Start
+  </a>
+  
+  
+  
+  |
+  <a href="/docs/guides/" class="active">
+    Guides
+  </a>
+  
+  
+  
+  |
+  <a href="/docs/tutorials/">
+    Tutorials
+  </a>
+  
+  
+  
+  |
+  <a href="/docs/reference/">
+    Reference
+  </a>
+  
+</div>
+
+
+<div class="quickstartcols">
+
+<div class="quickstartcol1">
+
+<h8>Guides</h8>
+
+
+<a href="/docs/guides/">
+  What is HRPC?
+</a>
+
+
+<a href="/docs/guides/concepts/">
+  HRPC Concepts
+</a>
+
+
+<a href="/docs/guides/auth/">
+  Authentication
+</a>
+
+
+<a href="/docs/guides/error/" class="active">
+  Error handling and debugging
+</a>
+
+
+<a href="/docs/guides/benchmarking/">
+  Benchmarking
+</a>
+
+
+<a href="https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md">
+  HRPC Wire Format
+</a>
+
+
+<h8 style="margin-top:25%">Related Guides</h8>
+  <a href="https://developers.google.com/protocol-buffers/docs/overview">Protocol Buffers</a>
+</div>
+
+<div class="quickstartcol2" style="margin-top:4%">
+  <h3 style="margin-top:0px;">
+    Error Handling
+  </h3>
+
+  
+  <p class="lead">
+    This page describes how HRPC deals with errors, including HRPC's built-in error codes. Example code in different languages can be found <a href="https://github.com/avinassh/grpc-errors">here</a>.
+  </p>
+  
+
+  <!-- raw HTML omitted -->
+<h3 id="standard-error-model">Standard error model</h3>
+<p>As you'll have seen in our concepts document and examples, when a HRPC call
 completes successfully the server returns an <code>OK</code> status to the client
 (depending on the language the <code>OK</code> status may or may not be directly used in
-your code). But what happens if the call isn't successful?</p><p>If an error occurs, HRPC returns one of its error status codes instead, with an
+your code). But what happens if the call isn't successful?</p>
+<p>If an error occurs, HRPC returns one of its error status codes instead, with an
 optional string error message that provides further details about what happened.
-Error information is available to HRPC clients in all supported languages.</p><h3 id=richer-error-model>Richer error model</h3><p>The error model described above is the official HRPC error model,
-is supported by all HRPC client/server libraries, and is independent of
-the HRPC data format (whether protocol buffers or something else). You
-may have noticed that it's quite limited and doesn't include the
-ability to communicate error details.</p><p>If you're using protocol buffers as your data format, however, you may
-wish to consider using the the richer error model developed and used
+Error information is available to HRPC clients in all supported languages.</p>
+<h3 id="richer-error-model">Richer error model</h3>
+<p>Internally HRPC uses a richer error model developed and used
 by Google as described
-<a href=https://cloud.google.com/apis/design/errors#error_model>here</a>. This
+<a href="https://cloud.google.com/apis/design/errors#error_model">here</a>. This
 model enables servers to return and clients to consume additional
 error details expressed as one or more protobuf messages. It further
-specifies a <a href=https://github.com/googleapis/googleapis/blob/master/google/rpc/error_details.proto>standard set of error message
+specifies a <a href="https://github.com/googleapis/googleapis/blob/master/google/rpc/error_details.proto">standard set of error message
 types</a>
 to cover the most common needs (such as invalid parameters, quota
 violations, and stack traces). The protobuf binary encoding of this
-extra error information is provided as trailing metadata in the
-response.</p><p>This richer error model is already supported in the C++, Go, Java,
-Python, and Ruby libraries, and at least the grpc-web and Node.js
-libraries have open issues requesting it. Other language libraries may
-add support in the future if there's demand, so check their github
-repos if interested. Note however that the grpc-core library written
-in C will not likely ever support it since it is purposely data format
-agnostic.</p><p>You could use a similar approach (put error details in trailing
-response metadata) if you're not using protocol buffers, but you'd
-likely need to find or develop library support for accessing this data
-in order to make practical use of it in your APIs.</p><p>There are important considerations to be aware of when deciding whether to
-use such an extended error model, however, including:</p><ul><li>library implementations of the extended error model may not be consistent
-across languages in terms of requirements for and expectations of the error
-details payload</li><li>existing proxies, loggers, and other standard HTTP request
-processors don't have visibility into the error details and thus
-wouldn't be able to leverage them for monitoring or other purposes</li><li>additional error detail in the trailers interferes with head-of-line
-blocking, and will decrease HTTP/2 header compression efficiency due to
-more frequent cache misses</li><li>larger error detail payloads may run into protocol limits (like
-max headers size), effectively losing the original error</li></ul><h3 id=error-status-codes>Error status codes</h3><p>Errors are raised by HRPC under various circumstances, from network failures to
+extra error information is provided as the response with an error http status code.</p>
+<p>To provide these extra details, create a grpc Status struct and then call <a href="https://godoc.org/google.golang.org/grpc/status#Status.Err">Status.Err()</a>.
+Beware of exposing too much detail about internal implementation details in error messages that are provided to browser clients.</p>
+<h3 id="error-status-codes">Error status codes</h3>
+<p>Errors are raised by HRPC under various circumstances, from network failures to
 unauthenticated connections, each of which is associated with a particular
 status code. The following error status codes are supported in all HRPC
-languages.</p><h4 id=general-errors>General errors</h4><table><thead><tr><th>Case</th><th>Status code</th></tr></thead><tbody><tr><td>Client application cancelled the request</td><td>GRPC_STATUS_CANCELLED</td></tr><tr><td>Deadline expired before server returned status</td><td>GRPC_STATUS_DEADLINE_EXCEEDED</td></tr><tr><td>Method not found on server</td><td>GRPC_STATUS_UNIMPLEMENTED</td></tr><tr><td>Server shutting down</td><td>GRPC_STATUS_UNAVAILABLE</td></tr><tr><td>Server threw an exception (or did something other than returning a status code to terminate the RPC)</td><td>GRPC_STATUS_UNKNOWN</td></tr><tr><td></td><td></td></tr></tbody></table><h4 id=network-failures>Network failures</h4><table><thead><tr><th>Case</th><th>Status code</th></tr></thead><tbody><tr><td>No data transmitted before deadline expires. Also applies to cases where some data is transmitted and no other failures are detected before the deadline expires</td><td>GRPC_STATUS_DEADLINE_EXCEEDED</td></tr><tr><td>Some data transmitted (for example, the request metadata has been written to the TCP connection) before the connection breaks</td><td>GRPC_STATUS_UNAVAILABLE</td></tr><tr><td></td><td></td></tr></tbody></table><h4 id=protocol-errors>Protocol errors</h4><table><thead><tr><th>Case</th><th>Status code</th></tr></thead><tbody><tr><td>Could not decompress but compression algorithm supported</td><td>GRPC_STATUS_INTERNAL</td></tr><tr><td>Compression mechanism used by client not supported by the server</td><td>GRPC_STATUS_UNIMPLEMENTED</td></tr><tr><td>Flow-control resource limits reached</td><td>GRPC_STATUS_RESOURCE_EXHAUSTED</td></tr><tr><td>Flow-control protocol violation</td><td>GRPC_STATUS_INTERNAL</td></tr><tr><td>Error parsing returned status</td><td>GRPC_STATUS_UNKNOWN</td></tr><tr><td>Unauthenticated: credentials failed to get metadata</td><td>GRPC_STATUS_UNAUTHENTICATED</td></tr><tr><td>Invalid host set in authority metadata</td><td>GRPC_STATUS_UNAUTHENTICATED</td></tr><tr><td>Error parsing response protocol buffer</td><td>GRPC_STATUS_INTERNAL</td></tr><tr><td>Error parsing request protocol buffer</td><td>GRPC_STATUS_INTERNAL</td></tr></tbody></table></div></div></div><script src=https://code.jquery.com/jquery-3.3.1.slim.min.js integrity=sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js integrity=sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 crossorigin=anonymous></script><script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js integrity=sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy crossorigin=anonymous></script></body></html>
+languages.</p>
+<h4 id="general-errors">General errors</h4>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Status code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Server threw an exception (or did something other than returning a status code to terminate the RPC)</td>
+<td>GRPC_STATUS_UNKNOWN</td>
+</tr>
+</tbody>
+</table>
+<p><strong>TODO</strong>
+Case | Status code
+&mdash;&ndash;|&mdash;&mdash;&mdash;&ndash;
+Deadline expired before server returned status | GRPC_STATUS_DEADLINE_EXCEEDED
+Method not found on server | GRPC_STATUS_UNIMPLEMENTED
+Server shutting down | GRPC_STATUS_UNAVAILABLE
+<!-- raw HTML omitted --></p>
+<h4 id="network-failures">Network failures</h4>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Status code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No data transmitted before deadline expires. Also applies to cases where some data is transmitted and no other failures are detected before the deadline expires</td>
+<td>GRPC_STATUS_DEADLINE_EXCEEDED</td>
+</tr>
+<tr>
+<td>Some data transmitted (for example, the request metadata has been written to the TCP connection) before the connection breaks</td>
+<td>GRPC_STATUS_UNAVAILABLE</td>
+</tr>
+<tr>
+<td><!-- raw HTML omitted --></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="protocol-errors">Protocol errors</h4>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Status code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Could not decompress but compression algorithm supported</td>
+<td>GRPC_STATUS_INTERNAL</td>
+</tr>
+<tr>
+<td>Error parsing returned status</td>
+<td>GRPC_STATUS_UNKNOWN</td>
+</tr>
+<tr>
+<td>Unauthenticated: credentials failed to identify a valid UserPrincipal</td>
+<td>GRPC_STATUS_UNAUTHENTICATED</td>
+</tr>
+<tr>
+<td>Error parsing response protocol buffer</td>
+<td>GRPC_STATUS_INTERNAL</td>
+</tr>
+<tr>
+<td>Error parsing request protocol buffer</td>
+<td>GRPC_STATUS_INTERNAL</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+</div>
+
+          
+          
+
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  </body>
+</html>
